@@ -32,17 +32,9 @@ USER checker
 WORKDIR /var/opt/checker
 
 
-# -------------------------------------> RUN linkchecker https://www.devopswiki.co.uk/Home
-# -------------------------------------> RUN linkchecker https://devopswiki.co.uk/Home
-# -------------------------------------> RUN linkchecker https://www.devopswiki.co.uk/Home#how-to-build-a-terraform-jenkins2-docker-pipeline
-# -------------------------------------> RUN linkchecker https://www.devopswiki.co.uk/wiki/openvpn/openvpn
-# -------------------------------------> RUN linkchecker http://10.152.183.167/Home
-# -------------------------------------> RUN linkchecker http://10.152.183.102/
-# -------------------------------------> RUN linkchecker https://dzone.com/articles/kafka-producer-and-consumer-example
+# --->
+# ---> Checking begins when docker run passes the source site url
+# ---> in LINK_CHECKER_SITE_URL as an --env variable.
+# --->
 
-RUN linkchecker http://10.152.183.167/
-
-
-# --------------> ENTRYPOINT ["/root/cert.authority/cert-authority-manager.sh"]
-# --------------> ENTRYPOINT [ "linkchecker", "http://10.152.183.167" ]
-ENTRYPOINT [ "linkchecker", "https://www.devopswiki.co.uk/", "--check-extern", "--config=/etc/linkchecker/linkcheckerrc" ]
+ENTRYPOINT linkchecker "$LINK_CHECKER_SITE_URL"
