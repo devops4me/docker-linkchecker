@@ -23,8 +23,8 @@ The command link checks the **[devopswiki.co.uk](https://www.devopswiki.co.uk)**
 You can link check portions of websites by using the below urls.
 
 ```
-linkchecker https://dzone.com/articles/kafka-producer-and-consumer-example
-linkchecker https://www.devopswiki.co.uk/wiki/openvpn/openvpn
+https://dzone.com/articles/kafka-producer-and-consumer-example
+https://www.devopswiki.co.uk/wiki/openvpn/openvpn
 ```
 
 ## Link Checker Configuration
