@@ -16,51 +16,62 @@ Disallow:
 
 ## how to run the link checker
 
-Let the **[devopswiki.co.uk](https://www.devopswiki.co.uk)** website be the guinea pig to link check.
+#### `docker run --env LINK_CHECKER_URL=https://www.devopswiki.co.uk/ devops4me/linkchecker`
 
-```
-docker run \
-    --network host \
-    --env LINK_CHECKER_SITE_URL=http://10.152.183.167/ \
-    img.linkchecker:latest
+The command link checks the **[devopswiki.co.uk](https://www.devopswiki.co.uk)** website. Add **`--network host`** to the docker run command to check a docker service running on the same host.
 
-docker run \
-    --detach \
-    --network host \
-    --name vm.linkchecker \
-    devops4me/linkchecker
-
-
-docker logs vm.linkchecker
-```
-
-You can link check other websites with the below statements.
+You can link check portions of websites by using the below urls.
 
 ```
 linkchecker https://dzone.com/articles/kafka-producer-and-consumer-example
 linkchecker https://www.devopswiki.co.uk/wiki/openvpn/openvpn
-linkchecker https://devopswiki.co.uk/Home
+```
+
+## Link Checker Configuration
+
+The [linkcheckerrc configuration file](linkcheckerrc) is placed in the .linkchecker folder off the home directory and drives the primary checking behaviour. The key linkchecker directives are stated here.
+
+```
+## ################################ ##
+## Configure the linkchecker output ##
+## ################################ ##
+
+[output]
+status=1   ; print status output
+log=text   ; set the logging type
+verbose=0  ; switch verbosity on or off
+warnings=1 ; report warnings
+quiet=0    ; set quiet mode
+
+## ################################# ##
+## Configure Link Checker Operations ##
+## ################################# ##
+
+[checking]
+threads=10        ; the maximum number of threads
+timeout=10        ; connection timeout in seconds
+aborttimeout=300  ; grace period awaiting checks to finish after Crl-C
+recursionlevel=7  ; the recursion depth to dig into
+sslverify=1       ; verify the SSL certificates for https links
+maxrunseconds=600 ; Stop checking new urls after these many seconds
+maxnumurls=10000  ; maximum number of urls to check
+
+maxrequestspersecond=30   ; max number of requests per second
+allowedschemes=http,https ; allowed URL schemes
 ```
 
 
-## docker build | linkchecker
+## local development | linkchecker
 
-For development, you may want to build the **linkchecker docker image locally** and then `docker run` the just-built image.
+To locally develop the linkchecker or tweak the configuration, you can perform a docker build and a docker run from your local image.
 
 ```
 git clone https://github.com/devops4me/docker-linkchecker
 cd docker-linkchecker
 docker build --no-cache --rm --tag img.linkchecker .
-docker exec               \
-    --interactive         \
-    --tty         \
-    --tag img.linkchecker \
-    linkchecker http://10.152.183.167/
-docker logs vm.linkchecker
-```
-    --name vm.linkchecker \
+docker run                \
     --network host        \
+    --env LINK_CHECKER_URL=http://10.152.183.167/ \
+    img.linkchecker
+```
 
-## Link Checker Configuration
-
-The [linkcheckerrc configuration file](linkcheckerrc) is placed in the .linkchecker folder off the home directory and drives the primary checking behaviour.

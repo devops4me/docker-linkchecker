@@ -37,4 +37,4 @@ WORKDIR /var/opt/checker
 # ---> in LINK_CHECKER_SITE_URL as an --env variable.
 # --->
 
-ENTRYPOINT linkchecker "$LINK_CHECKER_SITE_URL"
+ENTRYPOINT linkchecker "$LINK_CHECKER_URL"

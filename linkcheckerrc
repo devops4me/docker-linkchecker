@@ -1,170 +1,64 @@
-# Sample configuration file; see the linkcheckerrc(5) man page or
-# execute linkchecker -h for help on these options.
-# Commandline options override these settings.
 
-##################### output configuration ##########################
+## ################################ ##
+## Configure the linkchecker output ##
+## ################################ ##
+
 [output]
-# enable debug messages; see 'linkchecker -h' for valid debug names
-#debug=all
-# print status output
-status=1
-# change the logging type
-log=text
-# turn on/off --verbose
-verbose=0
-# turn on/off --warnings
-warnings=1
-# turn on/off --quiet
-#quiet=1
-# additional file output
-#fileoutput = text, html, gml, sql
+status=1   ; print status output
+log=text   ; set the logging type
+verbose=0  ; switch verbosity on or off
+warnings=1 ; report warnings
+quiet=0    ; set quiet mode
 
 
-##################### logger configuration ##########################
-# logger output part names:
-# all       For all parts
-# realurl   The full url link
-# result    Valid or invalid, with messages
-# extern    1 or 0, only in some logger types reported
-# base      <base href=...>
-# name      <a href=...>name</a> and <img alt="name">
-# parenturl The referrer URL if there is any
-# info      Some additional info, e.g. FTP welcome messages
-# warning   Warnings
-# dltime    Download time
-# checktime Check time
-# url       The original url name, can be relative
-# intro     The blurb at the beginning, "starting at ..."
-# outro     The blurb at the end, "found x errors ..."
-# stats     Statistics including URL lengths and contents.
+## ##################### ##
+## Configure the Loggers ##
+## ##################### ##
 
-# each Logger can have separate configuration parameters
-
-# standard text logger
 [text]
-#filename=linkchecker-out.txt
-#parts=all
-# colors for the various parts, syntax is <color> or <type>;<color>
-# type can be bold, light, blink, invert
-# color can be default, black, red, green, yellow, blue, purple, cyan, white,
-# Black, Red, Green, Yellow, Blue, Purple, Cyan, White
-#colorparent=white
-#colorurl=default
-#colorname=default
-#colorreal=cyan
-#colorbase=purple
-#colorvalid=bold;green
-#colorinvalid=bold;red
-#colorinfo=default
-#colorwarning=bold;yellow
-#colordltime=default
-#colorreset=default
 
-# GML logger
 [gml]
-#filename=linkchecker-out.gml
-#parts=all
-# valid encodings are listed in http://docs.python.org/library/codecs.html#standard-encodings
-# default encoding is iso-8859-15
-#encoding=utf_16
 
-# DOT logger
 [dot]
-#filename=linkchecker-out.dot
-#parts=all
-# default encoding is ascii since the original DOT format does not
-# support other charsets
-#encoding=iso-8859-15
 
-# CSV logger
 [csv]
-#filename=linkchecker-out.csv
-#separator=,
-#quotechar="
-#parts=all
 
-# SQL logger
 [sql]
-#filename=linkchecker-out.sql
-#dbname=linksdb
-#separator=;
-#parts=all
 
-# HTML logger
 [html]
-#filename=linkchecker-out.html
-# colors for the various parts
-#colorbackground=#fff7e5
-#colorurl=#dcd5cf
-#colorborder=#000000
-#colorlink=#191c83
-#colorwarning=#e0954e
-#colorerror=#db4930
-#colorok=#3ba557
-#parts=all
 
-# blacklist logger
 [blacklist]
-#filename=~/.linkchecker/blacklist
 
-# custom xml logger
 [xml]
-#encoding=iso-8859-1
 
-# GraphXML logger
 [gxml]
-#encoding=iso-8859-1
 
-# Sitemap logger
 [sitemap]
-#priority=0.7
+priority=0.7
 #frequency=weekly
 
 
-##################### checking options ##########################
+## ################################# ##
+## Configure Link Checker Operations ##
+## ################################# ##
 
 [checking]
-# number of threads
-threads=10
+threads=10        ; the maximum number of threads
+timeout=10        ; connection timeout in seconds
+aborttimeout=300  ; grace period awaiting checks to finish after Crl-C
+recursionlevel=7  ; the recursion depth to dig into
+sslverify=1       ; verify the SSL certificates for https links
+maxrunseconds=600 ; Stop checking new urls after these many seconds
+maxnumurls=10000  ; maximum number of urls to check
 
-# connection timeout in seconds
-timeout=10
+maxrequestspersecond=30   ; max number of requests per second
+allowedschemes=http,https ; allowed URL schemes
 
-# Time to wait for checks to finish after the user aborts the first time
-# (with Ctrl-C or the abort button).
-aborttimeout=300
-
-# The recursion level determines how many times links inside pages are followed.
-recursionlevel=7
-
-# User-Agent header string to send to HTTP web servers
-# robots.txt are always checked with the original User-Agent.
+## Aside from robots.txt which is always checked
+## with original LinkChecker user-agent.
 useragent=Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
 
-# When checking finishes, write a memory dump to a temporary file.
-# The memory dump is written both when checking finishes normally
-# and when checking gets canceled.
-# The memory dump only works if the python-meliae package is installed.
-# Otherwise a warning is printed to install it.
-#debugmemory=0
 
-# Check SSL certificates. Set to an absolute pathname for a custom
-# CA cert bundle to use. Set to zero to disable SSL certificate verification.
-#sslverify=1
-
-# Stop checking new URLs after the given number of seconds. Same as if the
-# user hits Ctrl-C after X seconds.
-maxrunseconds=600
-
-# Maximum number of URLs to check. New URLs will not be queued after the
-# given number of URLs is checked.
-maxnumurls=10000
-
-# Maximum number of requests per second to one host.
-maxrequestspersecond=30
-
-# Allowed URL schemes as a comma-separated list.
-allowedschemes=http,https
 
 ##################### filtering options ##########################
 [filtering]
