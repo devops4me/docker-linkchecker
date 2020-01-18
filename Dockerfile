@@ -8,6 +8,7 @@ USER root
 # --->
 
 RUN apt-get update && \
+    apt-get --assume-yes install -qq -o=Dpkg::Use-Pty=0 wget && \
     adduser --home /var/opt/checker --shell /bin/bash --gecos 'Link Checking User' checker && \
     install -d -m 755 -o checker -g checker /var/opt/checker && \
     usermod -a -G sudo checker
