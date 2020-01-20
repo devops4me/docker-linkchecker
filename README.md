@@ -16,9 +16,18 @@ Disallow:
 
 ## how to run the link checker
 
+The command link checks the **[devopswiki.co.uk](https://www.devopswiki.co.uk)** website.
+
 #### `docker run --env LINK_CHECKER_URL=https://www.devopswiki.co.uk/ devops4me/linkchecker`
 
-The command link checks the **[devopswiki.co.uk](https://www.devopswiki.co.uk)** website. Add **`--network host`** to the docker run command to check a docker service running on the same host.
+Add **`--network host`** to the docker run command to check a docker service running on the same host.
+
+```
+docker run                \
+    --network host        \
+    --env LINK_CHECKER_URL=http://localhost:4567/pages \
+    devops4me/linkchecker
+```
 
 You can link check portions of websites by using the below urls.
 
