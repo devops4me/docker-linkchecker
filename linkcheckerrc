@@ -45,7 +45,7 @@ priority=0.7
 [checking]
 threads=10        ; the maximum number of threads
 timeout=10        ; connection timeout in seconds
-aborttimeout=300  ; grace period awaiting checks to finish after Crl-C
+aborttimeout=5    ; grace period awaiting checks to finish after Ctrl-C
 recursionlevel=7  ; the recursion depth to dig into
 sslverify=1       ; verify the SSL certificates for https links
 maxrunseconds=600 ; Stop checking new urls after these many seconds

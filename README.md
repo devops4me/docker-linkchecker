@@ -59,7 +59,7 @@ quiet=0    ; set quiet mode
 [checking]
 threads=10        ; the maximum number of threads
 timeout=10        ; connection timeout in seconds
-aborttimeout=300  ; grace period awaiting checks to finish after Crl-C
+aborttimeout=5    ; grace period awaiting checks to finish after Ctrl-C
 recursionlevel=7  ; the recursion depth to dig into
 sslverify=1       ; verify the SSL certificates for https links
 maxrunseconds=600 ; Stop checking new urls after these many seconds
@@ -89,7 +89,6 @@ cd docker-linkchecker
 docker build --no-cache --rm --tag img.linkchecker .
 docker run                \
     --network host        \
-    --env LINK_CHECKER_URL=http://10.152.183.167/ \
+    --env LINK_CHECKER_URL=http://localhost:4567/pages \
     img.linkchecker
 ```
-

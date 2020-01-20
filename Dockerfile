@@ -38,4 +38,9 @@ WORKDIR /var/opt/checker
 # ---> in LINK_CHECKER_SITE_URL as an --env variable.
 # --->
 
-ENTRYPOINT linkchecker "$LINK_CHECKER_URL"
+ENTRYPOINT linkchecker \
+--ignore-url=.yaml$ \
+--ignore-url=.gitignore$ \
+--ignore-url=Dockerfile$ \
+--ignore-url=Jenkinsfile$ \
+"$LINK_CHECKER_URL"
