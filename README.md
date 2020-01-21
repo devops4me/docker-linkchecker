@@ -87,8 +87,8 @@ To locally develop the linkchecker or tweak the configuration, you can perform a
 git clone https://github.com/devops4me/docker-linkchecker
 cd docker-linkchecker
 docker build --no-cache --rm --tag img.linkchecker .
-docker run                \
-    --network host        \
-    --env LINK_CHECKER_URL=http://localhost:4567/pages \
+docker run         \
+    --network host \
+    --env LINK_CHECKER_URL=http://localhost:4567/ \
     img.linkchecker
 ```

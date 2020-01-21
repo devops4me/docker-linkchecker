@@ -43,4 +43,5 @@ ENTRYPOINT linkchecker \
 --ignore-url=.gitignore$ \
 --ignore-url=Dockerfile$ \
 --ignore-url=Jenkinsfile$ \
+--ignore-url=^/history/* \
 "$LINK_CHECKER_URL"
