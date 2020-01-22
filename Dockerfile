@@ -38,10 +38,14 @@ WORKDIR /var/opt/checker
 # ---> in LINK_CHECKER_SITE_URL as an --env variable.
 # --->
 
+############   --ignore-url='/[0-9a-f]\{40\}' \
+
+
 ENTRYPOINT linkchecker \
 --ignore-url=.yaml$ \
 --ignore-url=.gitignore$ \
 --ignore-url=Dockerfile$ \
 --ignore-url=Jenkinsfile$ \
 --ignore-url=^/history/* \
+--ignore-url=/[0-9a-f]{40}$ \
 "$LINK_CHECKER_URL"
